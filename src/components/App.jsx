@@ -16,10 +16,11 @@ export default class App extends Component {
     ).isRequired,
   };
 
+  step = 1;
+
   state = {
     publications: this.props,
     index: 0,
-    step: 1,
   };
 
   lengthOfArray = () => {
@@ -28,9 +29,9 @@ export default class App extends Component {
   };
 
   handleIncrement = () => {
-    if (this.state.index + this.state.step < this.lengthOfArray()) {
+    if (this.state.index + this.step < this.lengthOfArray()) {
       this.setState(prevState => ({
-        index: prevState.index + this.state.step,
+        index: prevState.index + this.step,
       }));
     } else return;
   };
@@ -39,7 +40,7 @@ export default class App extends Component {
     if (this.state.index > 0) {
       this.setState(prevState => {
         return {
-          index: prevState.index - this.state.step,
+          index: prevState.index - this.step,
         };
       });
     } else return;
@@ -55,13 +56,13 @@ export default class App extends Component {
         />
 
         <Counter
-          index={this.state.index + this.state.step}
+          index={this.state.index + this.step}
           length={this.lengthOfArray()}
         />
 
         <Publication
           publication={this.state.publications.items[this.state.index]}
-          number={this.state.index + this.state.step}
+          number={this.state.index + this.step}
         />
       </div>
     );
