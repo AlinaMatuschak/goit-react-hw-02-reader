@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import T from 'prop-types';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.module.css';
 import Controls from './Controls/Controls';
 import Counter from './Counter/Counter';
@@ -29,21 +31,27 @@ export default class App extends Component {
   };
 
   handleIncrement = () => {
-    if (this.state.index + this.step < this.lengthOfArray()) {
+    if (this.state.index + this.step >= this.lengthOfArray()) {
+      toast('Більше статей немає');
+      return;
+    } else {
       this.setState(prevState => ({
         index: prevState.index + this.step,
       }));
-    } else return;
+    }
   };
 
   handleDecrement = () => {
-    if (this.state.index > 0) {
+    if (this.state.index <= 0) {
+      toast('Це сама перша стаття');
+      return;
+    } else {
       this.setState(prevState => {
         return {
           index: prevState.index - this.step,
         };
       });
-    } else return;
+    }
   };
 
   render() {
