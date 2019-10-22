@@ -1,8 +1,8 @@
 import React from 'react';
-import './Counter.module.css';
+import { counter } from './Counter.module.css';
 
 const Counter = ({ index, length }) => (
-  <p className="counter">
+  <p className={counter}>
     {index}/{length}
   </p>
 );

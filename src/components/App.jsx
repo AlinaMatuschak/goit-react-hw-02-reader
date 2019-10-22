@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import T from 'prop-types';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './App.module.css';
+import { reader } from './App.module.css';
 import Controls from './Controls/Controls';
 import Counter from './Counter/Counter';
 import Publication from './Publication/Publication';
@@ -21,56 +20,38 @@ export default class App extends Component {
   step = 1;
 
   state = {
-    publications: this.props,
-    index: 0,
+    publicationIndex: 0,
   };
 
-  lengthOfArray = () => {
-    const publications = this.state.publications;
-    return publications.items.length;
-  };
-
-  handleIncrement = () => {
-    if (this.state.index + this.step >= this.lengthOfArray()) {
-      toast('Більше статей немає');
-      return;
-    } else {
-      this.setState(prevState => ({
-        index: prevState.index + this.step,
-      }));
-    }
-  };
-
-  handleDecrement = () => {
-    if (this.state.index <= 0) {
-      toast('Це сама перша стаття');
-      return;
-    } else {
-      this.setState(prevState => {
-        return {
-          index: prevState.index - this.step,
-        };
-      });
-    }
+  handlePublication = e => {
+    const outerText = e.target.outerText;
+    this.setState(prevState => ({
+      publicationIndex:
+        outerText === 'Вперед'
+          ? prevState.publicationIndex + this.step
+          : prevState.publicationIndex - this.step,
+    }));
   };
 
   render() {
     return (
-      <div className="reader">
+      <div className={reader}>
         <Controls
-          onIncrement={this.handleIncrement}
-          onDecrement={this.handleDecrement}
-          index={this.state.index}
+          onPublication={this.handlePublication}
+          onDecrement={this.handleIncrement}
+          index={this.state.publicationIndex}
+          length={this.props.items.length}
+          step={this.step}
         />
 
         <Counter
-          index={this.state.index + this.step}
-          length={this.lengthOfArray()}
+          index={this.state.publicationIndex + this.step}
+          length={this.props.items.length}
         />
 
         <Publication
-          publication={this.state.publications.items[this.state.index]}
-          number={this.state.index + this.step}
+          publication={this.props.items[this.state.publicationIndex]}
+          number={this.state.publicationIndex + this.step}
         />
       </div>
     );

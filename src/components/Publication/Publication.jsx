@@ -1,10 +1,10 @@
 import React from 'react';
-import './Publication.module.css';
+import { publications } from './Publication.module.css';
 
 const Publication = ({ publication, number }) => {
   const { title, text } = publication;
   return (
-    <article className="publication">
+    <article className={publications}>
       <h2>
         {number}. {title}
       </h2>

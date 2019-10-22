@@ -1,18 +1,25 @@
 import React from 'react';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './Controls.module.css';
+import { controls, button } from './Controls.module.css';
 
-const Controls = ({ onIncrement, onDecrement }) => (
-  <section className="controls">
-    <button type="button" className="button" onClick={onDecrement}>
+const Controls = ({ onPublication, index, length, step }) => (
+  <section className={controls}>
+    <button
+      type="button"
+      className={button}
+      onClick={onPublication}
+      disabled={index <= 0 && true}
+    >
       Назад
     </button>
-    <ToastContainer />
-    <button type="button" className="button" onClick={onIncrement}>
+    <button
+      type="button"
+      className={button}
+      onClick={onPublication}
+      disabled={index + step >= length && true}
+    >
       Вперед
     </button>
-    <ToastContainer />
   </section>
 );
 
