@@ -1,4 +1,5 @@
 import React from 'react';
+import T from 'prop-types';
 import 'react-toastify/dist/ReactToastify.css';
 import { controls, button } from './Controls.module.css';
 
@@ -22,5 +23,12 @@ const Controls = ({ onPublication, index, length, step }) => (
     </button>
   </section>
 );
+
+Controls.propTypes = {
+  onPublication: T.func.isRequired,
+  index: T.number.isRequired,
+  length: T.number.isRequired,
+  step: T.number.isRequired,
+};
 
 export default Controls;
