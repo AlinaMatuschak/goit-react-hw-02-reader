@@ -1,4 +1,5 @@
 import React from 'react';
+import T from 'prop-types';
 import { publications } from './Publication.module.css';
 
 const Publication = ({ publication, number }) => {
@@ -11,6 +12,11 @@ const Publication = ({ publication, number }) => {
       <p>{text}</p>
     </article>
   );
+};
+
+Publication.propTypes = {
+  number: T.number.isRequired,
+  publication: T.object.isRequired,
 };
 
 export default Publication;
